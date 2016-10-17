@@ -2,6 +2,8 @@
 
 利用Android Studio发布包aar/jar到bintray jcenter远程仓库中的笔记
 
+参考[blog.bugtags.com](http://blog.bugtags.com/2016/01/27/embrace-android-studio-maven-deploy/) 文档
+
 
 # Maven包（Package）
 
