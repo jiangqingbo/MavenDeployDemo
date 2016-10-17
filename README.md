@@ -4,6 +4,8 @@
 
 参考[blog.bugtags.com](http://blog.bugtags.com/2016/01/27/embrace-android-studio-maven-deploy/) 文档
 
+参考[demo例子](https://github.com/kevinho/Embrace-Android-Studio-Demo/tree/master/S4-MavenDeploy)
+
 
 # Maven包（Package）
 
