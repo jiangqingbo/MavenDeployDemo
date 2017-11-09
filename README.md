@@ -401,7 +401,7 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 
 如果一切顺利，你会在控制台看到多个文件上传成功的标输出
 
-#### 踩坑实录
+## 踩坑实录
 
 - HTTP/1.1 401 Unauthorized
 
@@ -418,6 +418,28 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
     		from sourceSets.main.java.srcDirs
     		exclude '**'
 	}
+	
+- gradlew: command not found
+
+解决方法1：使用 ./ 指定当前目录，如： ./gradlew bintrayUpload
+	
+解决方法2：配置全局环境变量
+
+   a）找到gradle文件所在路径。该文件可在Android Studio安装目录下找到，如：/Applications/Android Studio.app/Contents/gradle/gradle-2.14.1/bin
+   b）配置.bash_profile文件。如：
+   	
+		export PATH=${PATH}:/Applications/Android\ Studio.app/Contents/gradle/gradle-2.14.1/bin
+	
+   注意AndroidStudio单词间的 \ + 空格。
+   c）使.bash_profile文件立刻生效。在终端执行：source .bash_profile
+
+- Could not sign version '1.0.0': HTTP/1.1 400 Bad Request [message:Private key is required, please supply it by using a JSON body or alternatively it can be stored in your Bintray profile]
+
+出现这个错误，说明使用到了private key, 所以要将私钥key导出来，执行 创建GPG签名到步骤7 的操作：
+	
+	> gpg -a --export-secret-key your-email@your-mailbox.com > private_key_sender.asc
+
+然后将私钥文件内容拷贝并粘贴到bintray.com编辑信息里到GPG Signing栏目中的private key框里，然后点击Update，最后在执行上传library操作即可成功。
 
 
 ## 5. 上传 Jar 包
