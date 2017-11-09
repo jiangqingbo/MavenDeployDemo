@@ -428,7 +428,7 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
    a）找到gradle文件所在路径。该文件可在Android Studio安装目录下找到，如：/Applications/Android Studio.app/Contents/gradle/gradle-2.14.1/bin
    b）配置.bash_profile文件。如：
    	
-		export PATH=${PATH}:/Applications/Android\ Studio.app/Contents/gradle/gradle-2.14.1/bin
+	export PATH=${PATH}:/Applications/Android\ Studio.app/Contents/gradle/gradle-2.14.1/bin
 	
    注意AndroidStudio单词间的 \ + 空格。
    c）使.bash_profile文件立刻生效。在终端执行：source .bash_profile
