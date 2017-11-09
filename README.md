@@ -426,11 +426,13 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 解决方法2：配置全局环境变量
 
    a）找到gradle文件所在路径。该文件可在Android Studio安装目录下找到，如：/Applications/Android Studio.app/Contents/gradle/gradle-2.14.1/bin
+   
    b）配置.bash_profile文件。如：
    	
 	export PATH=${PATH}:/Applications/Android\ Studio.app/Contents/gradle/gradle-2.14.1/bin
 	
    注意AndroidStudio单词间的 \ + 空格。
+   
    c）使.bash_profile文件立刻生效。在终端执行：source .bash_profile
 
 - Could not sign version '1.0.0': HTTP/1.1 400 Bad Request [message:Private key is required, please supply it by using a JSON body or alternatively it can be stored in your Bintray profile]
