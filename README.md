@@ -205,15 +205,15 @@ Android Studio Gradle 主要支持两个 Maven 中央库：mavenCentral 和 jcen
 
 
 
-###### 1、创建一个 module：localrepo
+#### 1、创建一个 module：localrepo
 
-###### 2、将本地某个路径设置为仓库根目录：
+#### 2、将本地某个路径设置为仓库根目录：
 	
 		
 	file://D:/libs/repository (windows平台， 请自行更换)
 
 
-###### 3、为了优雅，在 localrepo 这个 module 的 gradle.properties 定义属性：
+#### 3、为了优雅，在 localrepo 这个 module 的 gradle.properties 定义属性：
 
 	PROJ_NAME=localrepodemo
 	PROJ_ARTIFACTID=localrepodemo
@@ -221,7 +221,7 @@ Android Studio Gradle 主要支持两个 Maven 中央库：mavenCentral 和 jcen
 
 	LOCAL_REPO_URL=file://D:/libs/repository
 
-###### 4、在 module 中应用和配置 maven plugin：
+#### 4、在 module 中应用和配置 maven plugin：
 
 	apply plugin: 'maven'
 
@@ -234,16 +234,16 @@ Android Studio Gradle 主要支持两个 Maven 中央库：mavenCentral 和 jcen
     	}
 	}
 
-###### 5、在控制台运行：
+#### 5、在控制台运行：
 
 	D:\x\x\MavenDeployDemo> gradlew.bat -p localrepo clean build uploadArchives --info
 
-###### 6、一切顺利的话，你的第一个本地包已经发布到设定的目录的本地仓库了
+#### 6、一切顺利的话，你的第一个本地包已经发布到设定的目录的本地仓库了
 
 
 # 使用本地包（两个疑问向读者请教）
 
-###### 1、要使用这个包，首先在项目的 build.gradle 中添加这个本地仓库：
+#### 1、要使用这个包，首先在项目的 build.gradle 中添加这个本地仓库：
 
 	allprojects {
    		repositories {
@@ -255,7 +255,7 @@ Android Studio Gradle 主要支持两个 Maven 中央库：mavenCentral 和 jcen
    		}
 	}
 
-###### 2、在某个 module（如 demo 项目中的 app） 的 build.gradle 中添加依赖：
+#### 2、在某个 module（如 demo 项目中的 app） 的 build.gradle 中添加依赖：
 
 	compile 'com.huyunit.as-gradle.demo:localrepodemo:1.0.0'
 
@@ -287,48 +287,48 @@ jcenter 是由 [bintray](https://bintray.com/) 提供的 maven 中央库托管�
 
 > 这种工具大概的意义是产生公钥和私钥，把公钥发送到公开的服务器，私钥用来产生包文件签名。包的使用者在拿到包文件之后，通过公钥来验证文件的有效性，运行具体原理参考[这里](https://www.gnupg.org/gph/en/manual/x135.html)。
 
-###### 1、下载 [gpgtool](http://gpgtools.org/)，安装
-###### 2、 检测安装成功，在命令行运行
+#### 1、下载 [gpgtool](http://gpgtools.org/)，安装
+#### 2、 检测安装成功，在命令行运行
 
 	C:\Users\think>gpg --version
 	gpg (GnuPG) 2.1.15
 	libgcrypt 1.7.3
 有类似的输出，就是正常安装了
 
-###### 3、产生证书，运行命令，按照提示输入
+#### 3、产生证书，运行命令，按照提示输入
 
 	> gpg --gen-key
 
-###### 4、检查结果
+#### 4、检查结果
 
 	> gpg --list-keys
 
-###### 5、找到刚才创建证书的时候，输入的相关信息那三行，例如：
+#### 5、找到刚才创建证书的时候，输入的相关信息那三行，例如：
 
 	pub   2048R/28A60488 2016-09-18 
 	uid       [ultimate] jiangqingbo <jqbo84@163.com>
 	sub   2048R/0DF90082 2016-09-18
 
-###### 6、上传公钥到服务器，找到你的 pub 的那一行，2048R/后的那一串八位字符串，如上面的：2E686B39，就是公钥 ID
+#### 6、上传公钥到服务器，找到你的 pub 的那一行，2048R/后的那一串八位字符串，如上面的：2E686B39，就是公钥 ID
 	
 	> gpg --keyserver hkp://pool.sks-keyservers.net --send-keys your-public-key-id
 
-###### 7、输出公钥和私钥成文件
+#### 7、输出公钥和私钥成文件
 
 	> gpg -a --export your-email@your-mailbox.com > public_key_sender.asc
 	> gpg -a --export-secret-key your-email@your-mailbox.com > private_key_sender.asc
 
-###### 8、配置本地 gradle 运行环境的属性，位于~/.gradle/gradle.properties，添加内容：
+#### 8、配置本地 gradle 运行环境的属性，位于~/.gradle/gradle.properties，添加内容：
 
 	signing.keyId=your-public-key-id
 	signing.password=your-gpg-password
 	signing.secretKeyRingFile=/Users/your-user-name/.gnupg/secring.gpg
 
-###### 9、bintray 本身可以通过在 profile->GPG Sining 中配置 public key 和 private key 来自动对上传的文件进行签名，在下图中，对应填入 public_key_sender.asc 与 private_key_sender.asc 的内容即可
+#### 9、bintray 本身可以通过在 profile->GPG Sining 中配置 public key 和 private key 来自动对上传的文件进行签名，在下图中，对应填入 public_key_sender.asc 与 private_key_sender.asc 的内容即可
 
 <img src="screenshot/2.jpg" width="720px" height="480px"/>
 
-###### 10、设置 bintray maven 包自动签名
+#### 10、设置 bintray maven 包自动签名
 选取 maven 仓库首页，进入 edit：
 
 <img src="screenshot/3.jpg" width="400px" height="280px"/>
@@ -352,7 +352,7 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 
 因为这里要上传的是 aar 格式的包，所以，具体是参考 [gradle-aar-example](https://github.com/bintray/bintray-examples/tree/master/gradle-aar-example) 例子，然而例子有一些地方没有更新，请注意下面的描述。
 
-###### 1、在项目中创建 local.properties 来配置 bintray 登陆信息以及 gpg 证书密码
+#### 1、在项目中创建 local.properties 来配置 bintray 登陆信息以及 gpg 证书密码
 
 	bintray.user=your-bintray-user
 	bintray.apikey=your-bintray-apikey
@@ -360,7 +360,7 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 
 其中 your-bintray-user 就是 bintray 右上角显示的用户名称，your-bintray-apikey 在 profile->API Key 可以找到，your-gpg-password 则是创建 gpg 证书的时候的密码
 
-###### 2、在项目的 build.gradle 配置 buildscript 的 classpath
+#### 2、在项目的 build.gradle 配置 buildscript 的 classpath
 
 	buildscript {
     	repositories {
@@ -374,18 +374,18 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
     	}
 	}
 
-###### 3、在 module 的 gradle.properties 文件中定义属性
+#### 3、在 module 的 gradle.properties 文件中定义属性
 
 	PROJ_NAME=bintrayaar
 	PROJ_ARTIFACTID=bintrayaar
 	PROJ_POM_NAME=Bintray Aar Repository
 
-###### 4、在 module 的 build.gradle 中使用插件
+#### 4、在 module 的 build.gradle 中使用插件
 
 	apply plugin: 'com.github.dcendents.android-maven'
 	apply plugin: 'com.jfrog.bintray'
 
-###### 5、为了build.gradle 文件干净，笔者创建了一个名为 bintray.gradle 的文件配置插件信息，请参考[这个文件](https://github.com/jiangqingbo/MavenDeployDemo/blob/master/bintrayaar/bintray.gradle)。
+#### 5、为了build.gradle 文件干净，笔者创建了一个名为 bintray.gradle 的文件配置插件信息，请参考[这个文件](https://github.com/jiangqingbo/MavenDeployDemo/blob/master/bintrayaar/bintray.gradle)。
 关键点：
 
 	artifacts {
@@ -395,7 +395,7 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 
 是为了同时生成 javadoc.jar 和 sources.jar 文件
 
-###### 6、build，上传
+#### 6、build，上传
 
 window：
 
@@ -452,12 +452,12 @@ Mac：
 
 ## 5. 上传 Jar 包
 
-###### 1、在上传 jar 的时候，使用的插件有些区别
+#### 1、在上传 jar 的时候，使用的插件有些区别
 
 	apply plugin: 'maven-publish'
 	apply plugin: 'com.jfrog.bintray'
 
-###### 2、在生成符合规定的 pom 文件的时候，要调用 groovy 的API，具体请参考[这个文件](https://github.com/jiangqingbo/MavenDeployDemo/blob/master/bintrayjar/bintray.gradle)
+#### 2、在生成符合规定的 pom 文件的时候，要调用 groovy 的API，具体请参考[这个文件](https://github.com/jiangqingbo/MavenDeployDemo/blob/master/bintrayjar/bintray.gradle)
 
 ## 6. 通过私有仓库的方式引用
 
