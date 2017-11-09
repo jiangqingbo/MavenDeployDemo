@@ -397,7 +397,13 @@ bintray 官方在 github 上托管了 [bintray-examples](https://github.com/bint
 
 ###### 6、build，上传
 
+window：
+
 	> gradlew.bat -p bintrayaar/ clean build bintrayUpload --info
+	
+Mac：
+
+	> ./gradlew -p bintrayaar/ clean build bintrayUpload --info
 
 如果一切顺利，你会在控制台看到多个文件上传成功的标输出
 
